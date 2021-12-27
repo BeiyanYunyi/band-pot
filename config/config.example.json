@@ -3,5 +3,10 @@
   "clientSecret": "",
   "serveUrl": "",
   "token": "",
-  "bandKey": []
+  "bandKey": [],
+  "reply": {
+    "header": "",
+    "msg": [""],
+    "footer": ""
+  }
 }

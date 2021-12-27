@@ -1,6 +1,7 @@
 import config from '../../config';
 import bandWrapper from '../bandWrapper';
 import getNoReplyPosts from '../utils/getNoReplyPosts';
+import getReplyMsg from '../utils/getReplyMsg';
 
 const task = async () => {
   const postKeys = await getNoReplyPosts();
@@ -11,7 +12,7 @@ const task = async () => {
         token: config.token,
         bandKey: post.bandKey,
         postKey: post.postKey,
-        body: '这是一条来自 bot 的自动回复，这样就可以按最近回帖来排序了',
+        body: getReplyMsg(),
       });
     }),
   );

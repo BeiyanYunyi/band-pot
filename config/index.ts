@@ -6,6 +6,11 @@ interface Config {
   serveUrl: string;
   token: string;
   bandKey: string[];
+  reply: {
+    header: string;
+    msg: string[];
+    footer: string;
+  };
 }
 
 const config: Config = configJson;
