@@ -1,8 +1,13 @@
 import config from '../../config';
+import generateTextFromTxt from './generateTextFromTxt';
+import getAryRandomItem from './getAryRandomItem';
 
-const getReplyMsg = () => {
-  const msgIndex = Math.floor(Math.random() * config.reply.msg.length);
-  return `${config.reply.header}${config.reply.msg[msgIndex]}${config.reply.footer}`;
+const getReplyMsg = async () => {
+  const msg: string =
+    config.reply.msg.length !== 0
+      ? getAryRandomItem(config.reply.msg)
+      : await generateTextFromTxt();
+  return `${config.reply.header}${msg}${config.reply.footer}`;
 };
 
 export default getReplyMsg;
