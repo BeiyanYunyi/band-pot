@@ -12,7 +12,7 @@ const task = async () => {
         token: config.token,
         bandKey: post.bandKey,
         postKey: post.postKey,
-        body: getReplyMsg(),
+        body: await getReplyMsg(),
       });
     }),
   );

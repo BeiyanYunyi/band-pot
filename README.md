@@ -21,7 +21,7 @@ Copy `config/config.example.json` to `config/config.json`, and modify it.
   "clientId": "",        // Not necessary.
   "clientSecret": "",    // Not necessary.
   "serveUrl": "",        // No use.
-  "token": "",           // User token, you can get it by create a app in Band's developer center.
+  "token": "",           // User token, you can get it by creating a app in Band's developer center.
   "bandKey": []          // The IDs of the bands you want the bot to listen.
 }
 ```
