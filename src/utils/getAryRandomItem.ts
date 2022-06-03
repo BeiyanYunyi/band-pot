@@ -1,2 +1,3 @@
-const getAryRandomItem = (ary: any[]) => ary[Math.floor(Math.random() * ary.length)];
+const getAryRandomItem = <T>(ary: T[]) => ary[Math.floor(Math.random() * ary.length)];
+
 export default getAryRandomItem;

@@ -1,16 +1,20 @@
 import configJson from './config.json';
 
-interface Config {
-  clientId: string;
-  clientSecret: string;
-  serveUrl: string;
-  token: string;
-  bandKey: string[];
+export interface BandConfig {
+  key: string;
   reply: {
     header: string;
     msg: string[];
     footer: string;
   };
+}
+
+interface Config {
+  clientId: string;
+  clientSecret: string;
+  serveUrl: string;
+  token: string;
+  band: BandConfig[];
 }
 
 const config: Config = configJson;

@@ -2,6 +2,8 @@ import axios from 'axios';
 import base64 from 'js-base64';
 import config from '../../config';
 import Author from '../../types/Author';
+import GetCommentsResponse from '../../types/GetCommentsResponse';
+import GetPostResponse from '../../types/GetPostResponse';
 import LatestComment from '../../types/LatestComment';
 import Photo from '../../types/Photo';
 
@@ -82,6 +84,36 @@ class BandWrapper {
     const { data } = await this.client.get('https://openapi.band.us/v2/band/posts', {
       params: { access_token: props.token, band_key: props.bandKey, locale: props.locale },
     });
+    return data;
+  }
+
+  async getPost(props: { token: string; bandKey: string; postKey: string }) {
+    const { data } = await this.client.get<GetPostResponse>(
+      'https://openapi.band.us/v2.1/band/post',
+      {
+        params: { access_token: props.token, band_key: props.bandKey, post_key: props.postKey },
+      },
+    );
+    return data;
+  }
+
+  async getComments(props: {
+    token: string;
+    bandKey: string;
+    postKey: string;
+    sort?: '+created_at' | '-created_at';
+  }) {
+    const { data } = await this.client.get<GetCommentsResponse>(
+      'https://openapi.band.us/v2/band/post/comments',
+      {
+        params: {
+          access_token: props.token,
+          band_key: props.bandKey,
+          post_key: props.postKey,
+          sort: props.sort,
+        },
+      },
+    );
     return data;
   }
 

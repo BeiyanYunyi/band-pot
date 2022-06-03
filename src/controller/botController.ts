@@ -8,11 +8,13 @@ const task = async () => {
   if (postKeys.length !== 0) console.log({ postKeys });
   await Promise.all(
     postKeys.map(async (post) => {
+      const bandCfg = config.band.find((band) => band.key === post.bandKey);
+      if (!bandCfg) throw new Error('No this band!');
       await bandWrapper.writeComment({
         token: config.token,
         bandKey: post.bandKey,
         postKey: post.postKey,
-        body: await getReplyMsg(),
+        body: await getReplyMsg(bandCfg),
       });
     }),
   );
