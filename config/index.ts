@@ -2,6 +2,7 @@ import configJson from './config.json';
 
 export interface BandConfig {
   key: string;
+  zombieMode?: boolean;
   reply: {
     header: string;
     msg: string[];

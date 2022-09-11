@@ -3,8 +3,10 @@ import http from 'http';
 import fs from 'fs/promises';
 import app from './app';
 import botController from './controller/botController';
+import zombieController from './controller/zombieController';
 
 botController();
+zombieController();
 process.on('uncaughtException', async (e) => {
   console.log(e);
   await fs.writeFile('error.log', e.stack || e.message);
