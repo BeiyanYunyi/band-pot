@@ -10,7 +10,10 @@ const getRandomSentence = () =>
         const { key: bandKey } = band;
         let txt = '';
         const posts = await bandWrapper.getPosts({ token: config.token, bandKey, locale: 'zh_CN' });
-        txt += `${posts.result_data.items.map((item) => item.content).join('|')}|`;
+        txt += `${posts.result_data.items
+          .filter((item) => !item.author.me)
+          .map((item) => item.content)
+          .join('|')}|`;
         const pms = posts.result_data.items.map(async (post) => {
           const resp = await bandWrapper.getComments({
             token: config.token,
@@ -18,11 +21,13 @@ const getRandomSentence = () =>
             postKey: post.post_key,
             sort: '-created_at',
           });
-          resp.result_data.items.forEach((comment, index) => {
-            if (index === resp.result_data.items.length - 1) {
-              txt += `${comment.content}`;
-            } else txt += `${comment.content}|`;
-          });
+          resp.result_data.items
+            .filter((item) => !item.author.me)
+            .forEach((comment, index) => {
+              if (index === resp.result_data.items.length - 1) {
+                txt += `${comment.content}`;
+              } else txt += `${comment.content}|`;
+            });
         });
         await Promise.all(pms);
         txt = txt.replaceAll('\n', '');
